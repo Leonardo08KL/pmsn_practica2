@@ -4,8 +4,6 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pmsn_practica2/database/email_auth.dart';
-//import 'package:pmsnb1/firebase/email_auth.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -33,13 +31,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  EmailAuth emailAuth = EmailAuth();
-  TextEditingController conEmail = TextEditingController();
-  TextEditingController conPass = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    final txtName = TextFormField(
+    final txtNombre = TextFormField(
       decoration: InputDecoration(
         labelText: "Nombre",
         labelStyle: const TextStyle(color: Colors.black),
@@ -57,8 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
     );
 
-    final txtEmail = TextFormField(
-      controller: conEmail,
+    final txtCorreo = TextFormField(
       decoration: InputDecoration(
         labelText: "Correo Electronico",
         labelStyle: const TextStyle(color: Colors.black),
@@ -76,8 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
     );
 
-    final txtPass = TextFormField(
-      controller: conPass,
+    final txtContrasena = TextFormField(
       obscureText: true,
       decoration: InputDecoration(
         labelText: "Contraseña",
@@ -103,26 +95,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
       height: 60,
     );
 
-    final btnRregister = ElevatedButton(
+    final btnRegistro = ElevatedButton(
       onPressed: () async {
-        if (formKey.currentState!.validate()) {
-          await emailAuth.createUserWithEmailAndPassword(
-              email: conEmail.text, password: conPass.text);
-          Navigator.pushNamed(context, '/login');
-        }
+        if (formKey.currentState!.validate()) {}
       },
       style: ElevatedButton.styleFrom(
         elevation: 10.0,
         textStyle:
             const TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 20),
         fixedSize: const Size(800, 60),
-        // backgroundColor:
-        //     const Color.fromARGB(255, 255, 255, 255), // Cambia el color aquí
+        backgroundColor:
+            const Color.fromARGB(255, 255, 255, 255), // Cambia el color aquí
       ),
       child: const Text('Registrarse'),
     );
 
-    final btnGallery = ElevatedButton(
+    final btnImagen = ElevatedButton(
       onPressed: () {
         getImage(ImageSource.gallery);
       },
@@ -138,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
 
-    final btnCamera = ElevatedButton(
+    final btnCamara = ElevatedButton(
       onPressed: () {
         getImage(ImageSource.camera);
       },
@@ -158,12 +146,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       resizeToAvoidBottomInset: false,
       body: Container(
         height: MediaQuery.of(context).size.height,
-        // decoration: const BoxDecoration(
-        //   image: DecorationImage(
-        //       image: AssetImage('assets/fondoregistro.jpg'),
-        //       fit: BoxFit.cover,
-        //       opacity: 0.9),
-        // ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Form(
@@ -185,26 +167,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               height: 150,
                               fit: BoxFit.cover,
                             )
-                          : Image.asset(
-                              'assets/avatar.png',
-                              width: 150,
+                          : Icon(
+                              Icons.person,
+                              size: 150,
                             ),
                     ),
                     spaceHorizontal,
                     spaceHorizontal,
-                    btnGallery,
+                    btnImagen,
                     spaceHorizontal,
-                    btnCamera,
+                    btnCamara,
                     spaceHorizontal,
-                    txtName,
+                    txtNombre,
                     spaceHorizontal,
-                    txtEmail,
+                    txtCorreo,
                     spaceHorizontal,
-                    txtPass,
+                    txtContrasena,
                     spaceHorizontal,
                     spaceHorizontal,
                     spaceHorizontal,
-                    btnRregister,
+                    btnRegistro,
                     spaceGiant
                   ],
                 ),
